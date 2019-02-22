@@ -55,14 +55,14 @@ To get only the first group
 
 To check if the current user is in any of the groups selected
 ```twig
-{% if entry.userGroupDropdown.inGroup(currentUser) %}
+{% if entry.userGroupFieldHandle.inGroup(currentUser) %}
     <h1>User can access</h1>
 {% endif %}
 ```
 
 To check if the current user can access something based on the group selection
 ```twig
-{% if entry.userGroupDropdown.canAccess(currentUser) %}
+{% if entry.userGroupFieldHandle.canAccess(currentUser) %}
     <h1>User can access</h1>
 {% endif %}
 ```

@@ -2,7 +2,7 @@
     "name": "superbig/craft-usergroupfield",
     "description": "Field type that let you select one or more user groups",
     "type": "craft-plugin",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "keywords": [
         "craft",
         "cms",

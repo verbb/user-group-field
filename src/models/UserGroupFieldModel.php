@@ -53,7 +53,7 @@ class UserGroupFieldModel extends Model
     {
         if (!$this->_groups) {
             $this->_groups = array_filter(Craft::$app->getUserGroups()->getAllGroups(), function(UserGroup $userGroup) {
-                return \in_array($userGroup->uid, $this->groupIds, false);
+                return \in_array($userGroup->uid, $this->getGroupIds(), false);
             });
         }
 

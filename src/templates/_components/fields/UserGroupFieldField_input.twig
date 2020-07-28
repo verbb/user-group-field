@@ -23,6 +23,9 @@
         options: userGroups,
         value: firstGroupId}) }}
 {% elseif mode == 'checkboxes' %}
+    {{ forms.hidden({
+        id: name,
+        name: name} )}}
     {{ forms.checkboxSelect({
         id: name,
         name: name,

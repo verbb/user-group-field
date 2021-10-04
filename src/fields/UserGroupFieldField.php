@@ -95,10 +95,13 @@ class UserGroupFieldField extends Field
             }
         }
 
-
-        return new UserGroupFieldModel([
-            'groupIds' => $value,
-        ]);
+        if (is_a($value, UserGroupFieldModel::class)) {
+            return $value;
+        } else {
+            return new UserGroupFieldModel([
+                'groupIds' => $value
+            ]);
+        }
     }
 
     /**

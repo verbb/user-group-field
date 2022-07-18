@@ -1,8 +1,8 @@
 {
-    "name": "superbig/craft-usergroupfield",
+    "name": "verbb/user-group-field",
     "description": "Field type that let you select one or more user groups",
     "type": "craft-plugin",
-    "version": "1.0.4",
+    "version": "2.0.0",
     "keywords": [
         "craft",
         "cms",
@@ -11,30 +11,36 @@
         "user group field"
     ],
     "support": {
-        "docs": "https://github.com/superbigco/craft-usergroupfield/blob/master/README.md",
-        "issues": "https://github.com/superbigco/craft-usergroupfield/issues"
+        "email": "support@verbb.io",
+        "issues": "https://github.com/verbb/user-group-field/issues?state=open",
+        "source": "https://github.com/verbb/user-group-field",
+        "docs": "https://github.com/verbb/user-group-field",
+        "rss": "https://github.com/verbb/user-group-field/commits/v2.atom"
     },
     "license": "MIT",
     "authors": [
+        {
+            "name": "Verbb",
+            "homepage": "http://verbb.io"
+        },
         {
             "name": "Superbig",
             "homepage": "https://superbig.co"
         }
     ],
     "require": {
-        "craftcms/cms": "^3.1.0"
+        "craftcms/cms": "^3.7.0",
+        "verbb/base": "^1.0.2"
     },
     "autoload": {
         "psr-4": {
-          "superbig\\usergroupfield\\": "src/"
+          "verbb\\usergroupfield\\": "src/"
         }
     },
     "extra": {
         "name": "User Group Field",
         "handle": "user-group-field",
-        "hasCpSettings": false,
-        "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/superbigco/craft-usergroupfield/master/CHANGELOG.md",
-        "class": "superbig\\usergroupfield\\UserGroupField"
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/usergroupfield/craft-3/CHANGELOG.md",
+        "class": "verbb\\usergroupfield\\UserGroupField"
     }
 }

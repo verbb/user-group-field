@@ -1,32 +1,14 @@
 <?php
-/**
- * User Group Field plugin for Craft CMS 3.x
- *
- * Field type that let you select one or more user groups
- *
- * @link      https://superbig.co
- * @copyright Copyright (c) 2019 Superbig
- */
-
-namespace superbig\usergroupfield\models;
-
-use craft\elements\User;
-use craft\models\UserGroup;
-use superbig\usergroupfield\UserGroupField;
+namespace verbb\usergroupfield\models;
 
 use Craft;
 use craft\base\Model;
+use craft\elements\User;
+use craft\models\UserGroup;
 
-/**
- * @author    Superbig
- * @package   UserGroupField
- * @since     1.0.0
- */
-class UserGroupFieldModel extends Model
+class UserGroupCollection extends Model
 {
-    private $_groups;
-
-    // Public Properties
+    // Properties
     // =========================================================================
 
     /**
@@ -34,26 +16,26 @@ class UserGroupFieldModel extends Model
      */
     public $groupIds = [];
 
+    private $_groups;
+
+
     // Public Methods
     // =========================================================================
 
     public function getGroupIds(): array
     {
-        if (!\is_array($this->groupIds)) {
+        if (!is_array($this->groupIds)) {
             $this->groupIds = [];
         }
 
         return array_values($this->groupIds);
     }
 
-    /**
-     * @return UserGroup[]
-     */
-    public function getGroups()
+    public function getGroups(): array
     {
         if (!$this->_groups) {
             $this->_groups = array_filter(Craft::$app->getUserGroups()->getAllGroups(), function(UserGroup $userGroup) {
-                return \in_array($userGroup->uid, $this->getGroupIds(), false);
+                return in_array($userGroup->uid, $this->getGroupIds(), false);
             });
         }
 
@@ -62,7 +44,11 @@ class UserGroupFieldModel extends Model
 
     public function inGroup(User $user = null): bool
     {
-        $groups  = $this->getGroups();
+        if (!$user) {
+            return false;
+        }
+
+        $groups = $this->getGroups();
         $inGroup = false;
 
         foreach ($groups as $group) {
@@ -76,6 +62,10 @@ class UserGroupFieldModel extends Model
 
     public function canAccess(User $user = null): bool
     {
+        if (!$user) {
+            return false;
+        }
+
         return $user->admin || $this->inGroup($user);
     }
 }

@@ -1,0 +1,10 @@
+{% import '_includes/forms' as forms %}
+
+{{ forms.selectField({
+    label: 'Mode' | t('user-group-field'),
+    instructions: 'Select the display mode' | t('user-group-field'),
+    id: 'mode',
+    name: 'mode',
+    options: modes,
+    value: field.mode,
+}) }}

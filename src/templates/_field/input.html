@@ -1,41 +1,32 @@
-{# @var craft \craft\web\twig\variables\CraftVariable #}
-{#
-/**
- * User Group Field plugin for Craft CMS 3.x
- *
- * UserGroupFieldField Field Input
- *
- * @author    Superbig
- * @copyright Copyright (c) 2019 Superbig
- * @link      https://superbig.co
- * @package   UserGroupField
- * @since     1.0.0
- */
-#}
-
-{% import "_includes/forms" as forms %}
+{% import '_includes/forms' as forms %}
 
 {% set firstGroupId = value.getGroupIds() | first %}
+
 {% if mode == 'dropdown' %}
     {{ forms.selectField({
         id: name,
         name: name,
         options: userGroups,
-        value: firstGroupId}) }}
+        value: firstGroupId,
+    }) }}
 {% elseif mode == 'checkboxes' %}
     {{ forms.hidden({
         id: name,
-        name: name} )}}
+        name: name,
+    }) }}
+
     {{ forms.checkboxSelect({
         id: name,
         name: name,
         options: userGroups,
-        values: value.getGroupIds()}) }}
+        values: value.getGroupIds(),
+    }) }}
 {% elseif mode == 'radio' %}
     {{ forms.radioGroupField({
         id: name,
         name: name,
         options: userGroups,
-        value: firstGroupId}) }}
+        value: firstGroupId,
+    }) }}
 {% endif %}
 

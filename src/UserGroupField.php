@@ -1,93 +1,52 @@
 <?php
-/**
- * User Group Field plugin for Craft CMS 3.x
- *
- * Field type that let you select one or more user groups
- *
- * @link      https://superbig.co
- * @copyright Copyright (c) 2019 Superbig
- */
+namespace verbb\usergroupfield;
 
-namespace superbig\usergroupfield;
+use verbb\usergroupfield\base\PluginTrait;
+use verbb\usergroupfield\fields\UserGroupField as UserGroupFieldField;
 
-use superbig\usergroupfield\services\UserGroupFieldService as UserGroupFieldServiceService;
-use superbig\usergroupfield\fields\UserGroupFieldField as UserGroupFieldFieldField;
-
-use Craft;
 use craft\base\Plugin;
-use craft\services\Plugins;
-use craft\events\PluginEvent;
-use craft\services\Fields;
 use craft\events\RegisterComponentTypesEvent;
+use craft\services\Fields;
 
 use yii\base\Event;
 
-/**
- * Class UserGroupField
- *
- * @author    Superbig
- * @package   UserGroupField
- * @since     1.0.0
- *
- * @property  UserGroupFieldServiceService $userGroupFieldService
- */
 class UserGroupField extends Plugin
 {
-    // Static Properties
+    // Properties
     // =========================================================================
 
-    /**
-     * @var UserGroupField
-     */
-    public static $plugin;
+    public $schemaVersion = '2.0.0';
 
-    // Public Properties
+
+    // Traits
     // =========================================================================
 
-    /**
-     * @var string
-     */
-    public $schemaVersion = '1.0.0';
+    use PluginTrait;
+
 
     // Public Methods
     // =========================================================================
 
-    /**
-     * @inheritdoc
-     */
-    public function init()
+    public function init(): void
     {
         parent::init();
+
         self::$plugin = $this;
 
-        Event::on(
-            Fields::class,
-            Fields::EVENT_REGISTER_FIELD_TYPES,
-            function (RegisterComponentTypesEvent $event) {
-                $event->types[] = UserGroupFieldFieldField::class;
-            }
-        );
-
-        Event::on(
-            Plugins::class,
-            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
-                if ($event->plugin === $this) {
-                }
-            }
-        );
-
-        Craft::info(
-            Craft::t(
-                'user-group-field',
-                '{name} plugin loaded',
-                ['name' => $this->name]
-            ),
-            __METHOD__
-        );
+        $this->_setPluginComponents();
+        $this->_setLogging();
+        $this->_registerFieldTypes();
     }
 
-    // Protected Methods
+
+    // Private Methods
     // =========================================================================
+
+    private function _registerFieldTypes(): void
+    {
+        Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, function(RegisterComponentTypesEvent $event) {
+            $event->types[] = UserGroupFieldField::class;
+        });
+    }
 
 }

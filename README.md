@@ -66,6 +66,14 @@ To check if the current user can access something based on the group selection:
 
 _Note: This check is always true for admins._
 
+You can also query a User Group Field based on the `uid` of a user.
+
+```twig
+{% set userGroup = craft.app.userGroups.getGroupByHandle('myUserGroup') %}
+
+{% set entries = craft.entries.section('blog').userGroupFieldHandle(userGroup.uid).all() %}
+```
+
 ## Credits
 Originally created by the team at [Superbig](https://superbig.co/).
 

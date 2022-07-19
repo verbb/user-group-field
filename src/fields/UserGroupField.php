@@ -6,6 +6,9 @@ use verbb\usergroupfield\models\UserGroupCollection;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
+use craft\elements\db\ElementQueryInterface;
+use craft\helpers\Db;
+use craft\helpers\ElementHelper;
 use craft\helpers\Json;
 use craft\models\UserGroup;
 
@@ -86,6 +89,17 @@ class UserGroupField extends Field
         $value = $value->getGroupIds();
 
         return parent::serializeValue($value, $element);
+    }
+
+    public function modifyElementsQuery(ElementQueryInterface $query, $value)
+    {
+        if ($value !== null) {
+            $column = ElementHelper::fieldColumnFromField($this);
+
+            $query->subQuery->andWhere(Db::parseParam("content.$column", $value, 'like', false, $this->getContentColumnType()));
+        }
+
+        return null;
     }
 
     public function getSettingsHtml(): ?string

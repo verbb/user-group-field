@@ -21,7 +21,7 @@ You can also add the package to your project using Composer.
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for User Group Field.
 
 ## Usage
-This plugin provides an Field Type where you can select one or more user groups. To create the field, go to Settings → Fields in your control panel.
+This plugin provides a Field Type where you can select one or more user groups. To create the field, go to Settings → Fields in your control panel.
 
 ### Field Settings
 There is 3 display modes:

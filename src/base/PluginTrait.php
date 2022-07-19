@@ -1,6 +1,8 @@
 <?php
 namespace verbb\usergroupfield\base;
 
+use verbb\usergroupfield\UserGroupField;
+
 use Craft;
 
 use yii\log\Logger;
@@ -12,7 +14,7 @@ trait PluginTrait
     // Static Properties
     // =========================================================================
 
-    public static $plugin;
+    public static UserGroupField $plugin;
 
 
     // Public Methods

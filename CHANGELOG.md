@@ -27,7 +27,7 @@
 ## 1.0.2 - 2019-09-10
 
 ### Fixed
-- Fixed error when no groups was returned
+- Fixed error when no groups were returned
 
 ## 1.0.1 - 2019-02-25
 

@@ -9,6 +9,7 @@ use craft\base\Field;
 use craft\elements\db\ElementQueryInterface;
 use craft\helpers\Db;
 use craft\helpers\ElementHelper;
+use craft\helpers\Html;
 use craft\helpers\Json;
 use craft\models\UserGroup;
 
@@ -19,9 +20,9 @@ class UserGroupField extends Field
     // Constants
     // =========================================================================
 
-    const MODE_DROPDOWN = 'dropdown';
-    const MODE_CHECKBOXES = 'checkboxes';
-    const MODE_RADIO = 'radio';
+    public const MODE_DROPDOWN = 'dropdown';
+    public const MODE_CHECKBOXES = 'checkboxes';
+    public const MODE_RADIO = 'radio';
 
 
     // Static Methods
@@ -33,39 +34,22 @@ class UserGroupField extends Field
     }
 
 
-    // Public Properties
+    // Properties
     // =========================================================================
 
-    /**
-     * @var string
-     */
-    public $mode = self::MODE_DROPDOWN;
-
-    /**
-     * @var array
-     */
-    public $userGroups = [];
+    public string $mode = self::MODE_DROPDOWN;
+    public array $userGroups = [];
 
 
     // Public Methods
     // =========================================================================
-
-    public function defineRules(): array
-    {
-        $rules = parent::defineRules();
-
-        $rules[] = ['mode', 'string'];
-        $rules[] = ['mode', 'default', 'value' => self::MODE_DROPDOWN];
-
-        return $rules;
-    }
 
     public function getContentColumnType(): string
     {
         return Schema::TYPE_TEXT;
     }
 
-    public function normalizeValue($value, ElementInterface $element = null)
+    public function normalizeValue(mixed $value, ?ElementInterface $element = null): mixed
     {
         if (is_string($value) && !empty($value)) {
             $value = Json::decodeIfJson($value);
@@ -84,22 +68,20 @@ class UserGroupField extends Field
         ]);
     }
 
-    public function serializeValue($value, ElementInterface $element = null)
+    public function serializeValue(mixed $value, ?ElementInterface $element = null): mixed
     {
         $value = $value->getGroupIds();
 
         return parent::serializeValue($value, $element);
     }
 
-    public function modifyElementsQuery(ElementQueryInterface $query, $value)
+    public function modifyElementsQuery(ElementQueryInterface $query, mixed $value): void
     {
         if ($value !== null) {
             $column = ElementHelper::fieldColumnFromField($this);
 
             $query->subQuery->andWhere(Db::parseParam("content.$column", $value, 'like', false, $this->getContentColumnType()));
         }
-
-        return null;
     }
 
     public function getSettingsHtml(): ?string
@@ -116,7 +98,7 @@ class UserGroupField extends Field
 
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-        $id = Craft::$app->getView()->formatInputId($this->handle);
+        $id = Html::id($this->handle);
         $namespacedId = Craft::$app->getView()->namespaceInputId($id);
 
         $userGroups = array_map(function(UserGroup $userGroup) {

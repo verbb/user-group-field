@@ -11,12 +11,9 @@ class UserGroupCollection extends Model
     // Properties
     // =========================================================================
 
-    /**
-     * @var array
-     */
-    public $groupIds = [];
+    public array $groupIds = [];
 
-    private $_groups;
+    private array $_groups = [];
 
 
     // Public Methods
@@ -24,10 +21,6 @@ class UserGroupCollection extends Model
 
     public function getGroupIds(): array
     {
-        if (!is_array($this->groupIds)) {
-            $this->groupIds = [];
-        }
-
         return array_values($this->groupIds);
     }
 

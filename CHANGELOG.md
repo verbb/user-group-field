@@ -6,6 +6,11 @@
 - Now requires PHP `8.0.2+`.
 - Now requires Craft `4.0.0+`.
 
+## 2.0.2 - 2022-08-03
+
+### Fixed
+- Fix an error when running migrations. (thanks @fthues).
+
 ## 2.0.1 - 2022-07-19
 
 ### Added
@@ -33,7 +38,7 @@
 ## 1.0.2 - 2019-09-10
 
 ### Fixed
-- Fixed error when no groups were returned
+- Fixed error when no groups was returned
 
 ## 1.0.1 - 2019-02-25
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.2 - 2022-08-03
+
+### Fixed
+- Fix an error when running migrations. (thanks @fthues).
+
 ## 2.0.1 - 2022-07-19
 
 ### Added

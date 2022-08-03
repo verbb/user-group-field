@@ -40,7 +40,7 @@
     "extra": {
         "name": "User Group Field",
         "handle": "user-group-field",
-        "changelogUrl": "https://raw.githubusercontent.com/verbb/usergroupfield/craft-3/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/user-group-field/craft-3/CHANGELOG.md",
         "class": "verbb\\usergroupfield\\UserGroupField"
     }
 }

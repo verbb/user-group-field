@@ -2,7 +2,7 @@
     "name": "verbb/user-group-field",
     "description": "Field type that let you select one or more user groups.",
     "type": "craft-plugin",
-    "version": "3.0.1",
+    "version": "4.0.0-beta.1",
     "keywords": [
         "craft",
         "cms",
@@ -29,19 +29,19 @@
         }
     ],
     "require": {
-        "php": "^8.0.2",
-        "craftcms/cms": "^4.0.0",
-        "verbb/base": "^2.0.0"
+        "php": "^8.2",
+        "craftcms/cms": "^5.0.0-alpha.1",
+        "verbb/base": "^3.0.0-beta.1"
     },
     "autoload": {
         "psr-4": {
-          "verbb\\usergroupfield\\": "src/"
+            "verbb\\usergroupfield\\": "src/"
         }
     },
     "extra": {
         "name": "User Group Field",
         "handle": "user-group-field",
-        "changelogUrl": "https://raw.githubusercontent.com/verbb/user-group-field/craft-4/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/user-group-field/craft-5/CHANGELOG.md",
         "class": "verbb\\usergroupfield\\UserGroupField"
     }
 }

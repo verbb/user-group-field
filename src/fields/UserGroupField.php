@@ -33,6 +33,11 @@ class UserGroupField extends Field
         return Craft::t('user-group-field', 'User Group');
     }
 
+    public static function dbType(): string
+    {
+        return Schema::TYPE_TEXT;
+    }
+
 
     // Properties
     // =========================================================================
@@ -44,12 +49,7 @@ class UserGroupField extends Field
     // Public Methods
     // =========================================================================
 
-    public function getContentColumnType(): string
-    {
-        return Schema::TYPE_TEXT;
-    }
-
-    public function normalizeValue(mixed $value, ?ElementInterface $element = null): mixed
+    public function normalizeValue(mixed $value, ElementInterface $element = null): mixed
     {
         if (is_string($value) && !empty($value)) {
             $value = Json::decodeIfJson($value);
@@ -68,7 +68,7 @@ class UserGroupField extends Field
         ]);
     }
 
-    public function serializeValue(mixed $value, ?ElementInterface $element = null): mixed
+    public function serializeValue(mixed $value, ElementInterface $element = null): mixed
     {
         $value = $value->getGroupIds();
 
@@ -80,7 +80,7 @@ class UserGroupField extends Field
         if ($value !== null) {
             $column = ElementHelper::fieldColumnFromField($this);
 
-            $query->subQuery->andWhere(Db::parseParam("content.$column", $value, 'like', false, $this->getContentColumnType()));
+            $query->subQuery->andWhere(Db::parseParam("content.$column", $value, 'like', false, $this->dbType()));
         }
     }
 
@@ -96,7 +96,7 @@ class UserGroupField extends Field
         ]);
     }
 
-    public function getInputHtml($value, ElementInterface $element = null): string
+    protected function inputHtml(mixed $value, ?ElementInterface $element, bool $inline): string
     {
         $id = Html::id($this->handle);
         $namespacedId = Craft::$app->getView()->namespaceInputId($id);

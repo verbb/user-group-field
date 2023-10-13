@@ -3,53 +3,31 @@ namespace verbb\usergroupfield\base;
 
 use verbb\usergroupfield\UserGroupField;
 
-use Craft;
-
-use yii\log\Logger;
-
-use verbb\base\BaseHelper;
+use verbb\base\LogTrait;
+use verbb\base\helpers\Plugin;
 
 trait PluginTrait
 {
-    // Static Properties
+    // Properties
     // =========================================================================
 
-    public static UserGroupField $plugin;
+    public static ?UserGroupField $plugin = null;
 
 
-    // Public Methods
+    // Traits
     // =========================================================================
 
-    public static function log($message, $attributes = []): void
-    {
-        if ($attributes) {
-            $message = Craft::t('user-group-field', $message, $attributes);
-        }
-
-        Craft::getLogger()->log($message, Logger::LEVEL_INFO, 'user-group-field');
-    }
-
-    public static function error($message, $attributes = []): void
-    {
-        if ($attributes) {
-            $message = Craft::t('user-group-field', $message, $attributes);
-        }
-
-        Craft::getLogger()->log($message, Logger::LEVEL_ERROR, 'user-group-field');
-    }
+    use LogTrait;
 
 
-    // Private Methods
+    // Static Methods
     // =========================================================================
 
-    private function _setPluginComponents(): void
+    public static function config(): array
     {
-        BaseHelper::registerModule();
-    }
+        Plugin::bootstrapPlugin('user-group-field');
 
-    private function _setLogging(): void
-    {
-        BaseHelper::setFileLogging('user-group-field');
+        return [];
     }
 
 }

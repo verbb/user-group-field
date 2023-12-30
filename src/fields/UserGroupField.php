@@ -96,6 +96,10 @@ class UserGroupField extends Field
         ]);
     }
 
+
+    // Protected Methods
+    // =========================================================================
+
     protected function inputHtml(mixed $value, ?ElementInterface $element, bool $inline): string
     {
         $id = Html::id($this->handle);

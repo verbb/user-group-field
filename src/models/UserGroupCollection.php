@@ -15,7 +15,6 @@ class UserGroupCollection extends Model
     public array $groupIds = [];
 
     private array $_groups = [];
-    private array $_allGroups = [];
 
     const CACHE_KEY = 'userGroupsCache';
 
@@ -59,13 +58,13 @@ class UserGroupCollection extends Model
         return $inGroup;
     }
 
-    public function canAccess(User $user = null,$cache = false): bool
+    public function canAccess(User $user = null, $cache = false): bool
     {
         if (!$user) {
             return false;
         }
 
-        return $user->admin || $this->inGroup($user,$cache);
+        return $user->admin || $this->inGroup($user, $cache);
     }
 
     private function _getUserGroups(): array

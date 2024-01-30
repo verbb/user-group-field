@@ -51,3 +51,12 @@ You can also query a User Group Field based on the `uid` of a user.
 
 {% set entries = craft.entries.section('blog').userGroupFieldHandle(userGroup.uid).all() %}
 ```
+
+## Caching
+By default `Craft::$app->getUserGroups()->getAllGroups();` is called for every element that has a user group field, requesting all the groups which won't change between entries, unless it's a CP request and a user group is added, edited or removed. 
+This data can be cached per url by adding a flag to the following calls - 
+`{% set groups = entry.userGroupFieldHandle.getGroups($cache = true) %}`
+
+`{% if entry.userGroupFieldHandle.inGroup(currentUser, $cache = true) %}`
+
+`{% if entry.userGroupFieldHandle.canAccess(currentUser, $cache = true) %}`

@@ -6,15 +6,6 @@ User Group Field is a Craft CMS plugin with a field type that lets you select on
 ## Documentation
 Visit the [User Group Field Plugin page](https://verbb.io/craft-plugins/user-group-field) for all documentation, guides, pricing and developer resources.
 
-### Caching Craft::$app->getUserGroups()->getAllGroups(); request.
-By default `Craft::$app->getUserGroups()->getAllGroups();` is called for every element that has a user group field, requesting all the groups which won't change between entries, unless it's a CP request and a user group is added, edited or removed. 
-This data can be cached per url by adding a flag to the following calls - 
-`{% set groups = entry.userGroupFieldHandle.getGroups($cache = true) %}`
-
-`{% if entry.userGroupFieldHandle.inGroup(currentUser, $cache = true) %}`
-
-`{% if entry.userGroupFieldHandle.canAccess(currentUser, $cache = true) %}`
-
 ## Credit & Thanks
 Originally created by the team at [Superbig](https://superbig.co/).
 

@@ -33,6 +33,11 @@ class UserGroupField extends Field
         return Craft::t('user-group-field', 'User Group');
     }
 
+    public static function icon(): string
+    {
+        return '@verbb/usergroupfield/icon-mask.svg';
+    }
+
     public static function dbType(): string
     {
         return Schema::TYPE_TEXT;

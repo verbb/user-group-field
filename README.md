@@ -1,5 +1,5 @@
-# User Group Field plugin for Craft CMS
-<img width="500" src="https://verbb.imgix.net/plugins/user-group-field/user-group-field-social-card.png?v=2">
+<p align="center"><img src="https://verbb.imgix.net/plugins/user-group-field/user-group-field-icon.svg" width="100" height="100" alt="User Group Field icon"></p>
+<h1 align="center">User Group Field for Craft CMS</h1>
 
 User Group Field is a Craft CMS plugin with a field type that lets you select one or more user groups.
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.2 - 2024-01-30
+
+### Added
+- Add caching mechanism for user groups to assist with performance. (thanks @anchovy).
+
 ## 3.0.1 - 2022-08-03
 
 ### Fixed

@@ -6,6 +6,7 @@ use verbb\usergroupfield\models\UserGroupCollection;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
+use craft\db\QueryParam;
 use craft\elements\db\ElementQueryInterface;
 use craft\helpers\Db;
 use craft\helpers\ElementHelper;
@@ -43,6 +44,38 @@ class UserGroupField extends Field
         return Schema::TYPE_TEXT;
     }
 
+    public static function queryCondition(array $instances, mixed $value, array &$params): ?array
+    {
+        $field = reset($instances);
+
+        if ($field->mode === self::MODE_CHECKBOXES) {
+            $param = QueryParam::parse($value);
+
+            if (empty($param->values)) {
+                return null;
+            }
+
+            if ($param->operator === QueryParam::NOT) {
+                $param->operator = QueryParam::OR;
+                $negate = true;
+            } else {
+                $negate = false;
+            }
+
+            $condition = [$param->operator];
+            $qb = Craft::$app->getDb()->getQueryBuilder();
+            $valueSql = static::valueSql($instances);
+
+            foreach ($param->values as $value) {
+                $condition[] = $qb->jsonContains($valueSql, $value);
+            }
+
+            return $negate ? ['not', $condition] : $condition;
+        }
+
+        return parent::queryCondition($instances, $value, $params);
+    }
+
 
     // Properties
     // =========================================================================
@@ -78,15 +111,6 @@ class UserGroupField extends Field
         $value = $value->getGroupIds();
 
         return parent::serializeValue($value, $element);
-    }
-
-    public function modifyElementsQuery(ElementQueryInterface $query, mixed $value): void
-    {
-        if ($value !== null) {
-            $column = ElementHelper::fieldColumnFromField($this);
-
-            $query->subQuery->andWhere(Db::parseParam("content.$column", $value, 'like', false, $this->dbType()));
-        }
     }
 
     public function getSettingsHtml(): ?string

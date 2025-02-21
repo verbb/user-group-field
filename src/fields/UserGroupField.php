@@ -6,7 +6,9 @@ use verbb\usergroupfield\models\UserGroupCollection;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
+use craft\base\PreviewableFieldInterface;
 use craft\elements\db\ElementQueryInterface;
+use craft\helpers\ArrayHelper;
 use craft\helpers\Db;
 use craft\helpers\ElementHelper;
 use craft\helpers\Html;
@@ -15,7 +17,7 @@ use craft\models\UserGroup;
 
 use yii\db\Schema;
 
-class UserGroupField extends Field
+class UserGroupField extends Field implements PreviewableFieldInterface
 {
     // Constants
     // =========================================================================
@@ -117,5 +119,18 @@ class UserGroupField extends Field
             'userGroups' => $userGroups,
             'mode' => $this->mode,
         ]);
+    }
+
+    public function getTableAttributeHtml(mixed $value, ElementInterface $element): string
+    {
+        $labels = [];
+
+        if ($value && $groups = $value->getGroups()) {
+            foreach ($groups as $group) {
+                $labels[] = Craft::t('site', $group->name);
+            }
+        }
+
+        return implode(', ', $labels);
     }
 }

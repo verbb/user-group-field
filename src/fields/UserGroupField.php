@@ -6,8 +6,10 @@ use verbb\usergroupfield\models\UserGroupCollection;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
+use craft\base\PreviewableFieldInterface;
 use craft\db\QueryParam;
 use craft\elements\db\ElementQueryInterface;
+use craft\helpers\ArrayHelper;
 use craft\helpers\Db;
 use craft\helpers\ElementHelper;
 use craft\helpers\Html;
@@ -16,7 +18,7 @@ use craft\models\UserGroup;
 
 use yii\db\Schema;
 
-class UserGroupField extends Field
+class UserGroupField extends Field implements PreviewableFieldInterface
 {
     // Constants
     // =========================================================================
@@ -123,6 +125,19 @@ class UserGroupField extends Field
                 self::MODE_RADIO => Craft::t('user-group-field', 'Radio buttons'),
             ],
         ]);
+    }
+
+    public function getPreviewHtml(mixed $value, ElementInterface $element): string
+    {
+        $labels = [];
+
+        if ($value && $groups = $value->getGroups()) {
+            foreach ($groups as $group) {
+                $labels[] = Craft::t('site', $group->name);
+            }
+        }
+
+        return implode(', ', $labels);
     }
 
 

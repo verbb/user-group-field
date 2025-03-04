@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.0.1 - 2025-03-04
+
+### Added
+- Add the ability to use the field in element index columns.
+
+### Fixed
+- Fix being unable to query elements on the User Group Field value for Checkboxes.
+
 ## 4.0.0 - 2024-05-12
 
 ### Changed

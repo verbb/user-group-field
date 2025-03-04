@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.3 - 2025-03-04
+
+### Added
+- Add the ability to use the field in element index columns.
+
 ## 3.0.2 - 2024-01-30
 
 ### Added

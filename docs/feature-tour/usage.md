@@ -2,7 +2,7 @@
 This plugin provides a Field Type where you can select one or more user groups. To create the field, go to Settings → Fields in your control panel.
 
 ## Field Settings
-There is 3 display modes:
+There are three display modes:
 - As a dropdown, where you can select only 1 group.
 - As a group of checkboxes, where you can select 1 or more groups.
 - As a group of radio buttons, where you can select only 1 group.
@@ -21,9 +21,11 @@ To list the group(s) selected:
 To get only the first group:
 
 ```twig
-{% set groups = entry.userGroupFieldHandle.getGroups() | first %}
+{% set group = entry.userGroupFieldHandle.getGroups() | first %}
 
-{{ group.name }}
+{% if group %}
+    {{ group.name }}
+{% endif %}
 ```
 
 To check if the current user is in any of the groups selected:
@@ -44,7 +46,7 @@ To check if the current user can access something based on the group selection:
 
 _Note: This check is always true for admins._
 
-You can also query a User Group Field based on the `uid` of a user.
+You can also query a User Group Field using the `uid` of a user group.
 
 ```twig
 {% set userGroup = craft.app.userGroups.getGroupByHandle('myUserGroup') %}
@@ -53,10 +55,18 @@ You can also query a User Group Field based on the `uid` of a user.
 ```
 
 ## Caching
-By default `Craft::$app->getUserGroups()->getAllGroups();` is called for every element that has a user group field, requesting all the groups which won't change between entries, unless it's a CP request and a user group is added, edited or removed. 
-This data can be cached per url by adding a flag to the following calls - 
-`{% set groups = entry.userGroupFieldHandle.getGroups($cache = true) %}`
+When you render this field across many entries, you can enable caching of the available user groups. Pass `true` as the cache argument in Twig:
 
-`{% if entry.userGroupFieldHandle.inGroup(currentUser, $cache = true) %}`
+```twig
+{% set groups = entry.userGroupFieldHandle.getGroups(true) %}
 
-`{% if entry.userGroupFieldHandle.canAccess(currentUser, $cache = true) %}`
+{% if entry.userGroupFieldHandle.inGroup(currentUser, true) %}
+    <p>You belong to one of the selected groups.</p>
+{% endif %}
+
+{% if entry.userGroupFieldHandle.canAccess(currentUser, true) %}
+    <p>You have access.</p>
+{% endif %}
+```
+
+`inGroup()` checks membership, while `canAccess()` also grants access to administrators. Both return `false` for a guest. These conditions control the output of this template; hiding a link does not protect its destination. Apply the corresponding access check on the page that serves restricted content too.

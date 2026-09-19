@@ -3,6 +3,8 @@
 
 User Group Field is a Craft CMS plugin with a field type that lets you select one or more user groups.
 
+Selected groups can appear in element index columns, and element queries can filter field values by user-group UID.
+
 ## Documentation
 Visit the [User Group Field Plugin page](https://verbb.io/craft-plugins/user-group-field) for all documentation, guides, pricing and developer resources.
 

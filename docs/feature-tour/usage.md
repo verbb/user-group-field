@@ -7,6 +7,8 @@ There are three display modes:
 - As a group of checkboxes, where you can select 1 or more groups.
 - As a group of radio buttons, where you can select only 1 group.
 
+![A User Group field displayed as checkboxes](../../screenshots/user-group-field.png)
+
 ## Templating
 To list the group(s) selected:
 

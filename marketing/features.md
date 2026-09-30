@@ -7,7 +7,7 @@ User Group Field makes Craft’s user groups available as content. Let authors s
 
 Add the field to an entry, user, global set, or another supported layout and choose whether it accepts one group or several. Authors select from the user groups already configured for the Craft project.
 
-![User Group fields displayed as a dropdown, checkboxes and radio buttons](../screenshots/output/feature-tour/user-group-field.png)
+![User Group fields displayed as a dropdown, checkboxes and radio buttons](../screenshots/user-group-field.png)
 
 <!-- feature-section-end -->
 

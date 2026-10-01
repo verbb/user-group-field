@@ -82,7 +82,7 @@ class UserGroupCollection extends Model
     private function _getAllGroups(bool $cache = false): array
     {
         $allGroups = [];
-        
+
         if ($cache) {
             $cacheService = Craft::$app->getCache();
             $cacheKey = self::CACHE_KEY;

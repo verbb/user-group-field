@@ -133,7 +133,7 @@ class UserGroupField extends Field implements PreviewableFieldInterface
 
         if ($value && $groups = $value->getGroups()) {
             foreach ($groups as $group) {
-                $labels[] = Craft::t('site', $group->name);
+                $labels[] = Html::encode(Craft::t('site', $group->name));
             }
         }
 

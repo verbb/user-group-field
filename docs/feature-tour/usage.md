@@ -2,6 +2,8 @@
 This plugin provides a Field Type where you can select one or more user groups. To create the field, go to Settings → Fields in your control panel.
 
 ## Field Settings
+Use **Available User Groups** to choose which groups editors can select in this field. Leave **All** selected to include every group, including groups created later, or deselect **All** and choose specific groups. For example, a field used to control access to school content could offer Students, Faculty, and School Administrators while leaving out groups used only for control panel publishing.
+
 There are three display modes:
 - As a dropdown, where you can select only 1 group.
 - As a group of checkboxes, where you can select 1 or more groups.

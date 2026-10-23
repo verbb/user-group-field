@@ -1,5 +1,15 @@
 {% import '_includes/forms' as forms %}
 
+{{ forms.checkboxSelectField({
+    label: 'Available User Groups' | t('user-group-field'),
+    instructions: 'Choose which user groups can be selected in this field.' | t('user-group-field'),
+    id: 'availableGroups',
+    name: 'availableGroups',
+    options: userGroups,
+    values: field.availableGroups,
+    showAllOption: true,
+}) }}
+
 {{ forms.selectField({
     label: 'Mode' | t('user-group-field'),
     instructions: 'Select the display mode' | t('user-group-field'),

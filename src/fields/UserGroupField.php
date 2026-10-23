@@ -84,6 +84,7 @@ class UserGroupField extends Field implements PreviewableFieldInterface
 
     public string $mode = self::MODE_DROPDOWN;
     public array $userGroups = [];
+    public array|string $availableGroups = '*';
 
 
     // Public Methods
@@ -119,6 +120,7 @@ class UserGroupField extends Field implements PreviewableFieldInterface
     {
         return Craft::$app->getView()->renderTemplate('user-group-field/_field/settings', [
             'field' => $this,
+            'userGroups' => $this->_getUserGroupOptions(),
             'modes' => [
                 self::MODE_DROPDOWN => Craft::t('user-group-field', 'Dropdown'),
                 self::MODE_CHECKBOXES => Craft::t('user-group-field', 'Checkboxes'),
@@ -149,12 +151,11 @@ class UserGroupField extends Field implements PreviewableFieldInterface
         $id = Html::id($this->handle);
         $namespacedId = Craft::$app->getView()->namespaceInputId($id);
 
-        $userGroups = array_map(function(UserGroup $userGroup) {
-            return [
-                'label' => $userGroup->name,
-                'value' => $userGroup->uid,
-            ];
-        }, Craft::$app->getUserGroups()->getAllGroups());
+        $userGroups = $this->_getUserGroupOptions();
+
+        if ($this->availableGroups !== '*') {
+            $userGroups = array_values(array_filter($userGroups, fn(array $option) => in_array($option['value'], (array)$this->availableGroups, true)));
+        }
 
         return Craft::$app->getView()->renderTemplate('user-group-field/_field/input', [
             'name' => $this->handle,
@@ -165,5 +166,20 @@ class UserGroupField extends Field implements PreviewableFieldInterface
             'userGroups' => $userGroups,
             'mode' => $this->mode,
         ]);
+    }
+
+
+    // Private Methods
+    // =========================================================================
+
+    private function _getUserGroupOptions(): array
+    {
+        // Group UIDs keep field settings portable between environments.
+        return array_map(function(UserGroup $userGroup) {
+            return [
+                'label' => $userGroup->name,
+                'value' => $userGroup->uid,
+            ];
+        }, Craft::$app->getUserGroups()->getAllGroups());
     }
 }

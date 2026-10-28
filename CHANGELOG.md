@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.0.4 - 2026-10-28
 
 ### Added
 - Added an “Available User Groups” field setting to choose which groups editors can select. ([#26](https://github.com/verbb/user-group-field/issues/26))

@@ -2,7 +2,7 @@
     "name": "verbb/user-group-field",
     "description": "A Craft CMS field for selecting one or more user groups.",
     "type": "craft-plugin",
-    "version": "4.0.3",
+    "version": "4.0.4",
     "keywords": [
         "craft",
         "cms",

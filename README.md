@@ -14,19 +14,22 @@ Add the field to an entry, user, global set, or another supported layout and cho
 - Use selected group models and handles in project templates.
 - Add the selected group values to supported Craft index columns.
 - Filter element queries by a selected user group's UID.
-- Configure selection mode and available options for each field.
 
 ## Documentation
+
 Visit the [User Group Field Plugin page](https://verbb.io/craft-plugins/user-group-field) for all documentation, guides, pricing and developer resources.
 
 ## Credit & Thanks
+
 Originally created by the team at [Superbig](https://superbig.co/).
 
 ## Support
-Get in touch with us via the [User Group Field Support page](https://verbb.io/craft-plugins/user-group-field/support) or by [creating a Github issue](https://github.com/verbb/user-group-field/issues)
+
+Get in touch with us via the [User Group Field Support page](https://verbb.io/craft-plugins/user-group-field/support) or by [creating a GitHub issue](https://github.com/verbb/user-group-field/issues).
 
 ## Sponsor
-User Group Field is licensed under the MIT license, meaning it will always be free and open source - we love free stuff! If you'd like to show your support to the plugin regardless, [Sponsor](https://github.com/sponsors/verbb) development.
+
+User Group Field is licensed under the MIT license, so it will always be free and open source. If you'd like to support it anyway, you can [sponsor its development](https://github.com/sponsors/verbb).
 
 <h2></h2>
 
